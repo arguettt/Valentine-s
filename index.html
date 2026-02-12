@@ -10,10 +10,28 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     text-align: center;
-    background: #ffe6f0;
     overflow: hidden;
+    color: white;
 }
 
+/* Background slideshow */
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: -1;
+}
+
+/* Main container */
 .container {
     position: absolute;
     top: 40%;
@@ -65,7 +83,7 @@ button {
 }
 
 #extraBtn {
-    background-color: #ffffff;
+    background-color: white;
     color: black;
     margin-top: 15px;
 }
@@ -86,7 +104,7 @@ button {
     padding: 30px;
     max-width: 500px;
     border-radius: 8px;
-    font-family: "Georgia", serif;
+    font-family: Georgia, serif;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     animation: fadeIn 0.6s ease forwards;
 }
@@ -106,6 +124,9 @@ canvas {
 
 <body>
 
+<div class="background" id="bg"></div>
+<div class="overlay"></div>
+
 <div class="container">
     <h1>My Love, my beautiful, gorgeous, funny, sexy, dangerously attractive, effortlessly hot, stunning, dangerous, hilarious, adventurer, playful, mischievous, irresistible, charming, captivating, bold, confident, cheeky, spontaneous, passionate, warm, affectionate, clever, sharp, teasing, radiant, vibrant, strong, loyal, deeply loving, unforgettable, intoxicating wife,
 <br>Would you be my Valentine? (remember you signed the paper so you have to, don't click the NO option)</h1>
@@ -121,21 +142,11 @@ canvas {
 
 <div id="letter">
     <div class="scroll">
-        <p>
-        Being apart from you is never an easy task. No matter how strong I try to be, there’s always a quiet space that only you fill.  
-        </p>
-        <p>
-        After all these years, and after everything life has and keeps throwing at us, we’re together. And that means more to me than I can ever explain. It feels like the world finally aligned the way it was always meant to.
-        </p>
-        <p>
-        I love you deeply, fiercely, completely. Not just on Valentine’s Day. Not just when things are easy. I promise to care for you, protect you, and choose you every single day. Because every day becomes special simply by having you in it.
-        </p>
-        <p>
-        Nothing will pull us apart. We’ve waited too long and fought too hard. I’m yours, truly, fully and forever.
-        </p>
-        <p>
-        With love, your husband.
-        </p>
+        <p>Being apart from you is never an easy task. No matter how strong I try to be, there’s always a quiet space that only you fill.</p>
+        <p>After all these years, and after everything life has and keeps throwing at us, we’re together. And that means more to me than I can ever explain. It feels like the world finally aligned the way it was always meant to.</p>
+        <p>I love you deeply, fiercely, completely. Not just on Valentine’s Day. Not just when things are easy. I promise to care for you, protect you, and choose you every single day. Because every day becomes special simply by having you in it.</p>
+        <p>Nothing will pull us apart. We’ve waited too long and fought too hard. I’m yours, truly, fully and forever.</p>
+        <p>With love, your husband.</p>
         <p style="margin-top:20px;">— Always</p>
     </div>
 </div>
@@ -147,6 +158,19 @@ canvas {
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
+/* Background rotation */
+const images = ["us1.jpg","us2.jpg","us3.jpg","us4.jpg"];
+const bg = document.getElementById("bg");
+let index = 0;
+
+function changeBackground() {
+    bg.style.backgroundImage = `url('${images[index]}')`;
+    index = (index + 1) % images.length;
+}
+changeBackground();
+setInterval(changeBackground, 4000);
+
+/* Existing functionality */
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const result = document.getElementById("result");
@@ -172,9 +196,7 @@ yesBtn.addEventListener("click", () => {
     (function frame() {
         confetti({ particleCount: 8, angle: 60, spread: 55, origin: { x: 0 } });
         confetti({ particleCount: 8, angle: 120, spread: 55, origin: { x: 1 } });
-        if (Date.now() < end) {
-            requestAnimationFrame(frame);
-        }
+        if (Date.now() < end) requestAnimationFrame(frame);
     })();
 });
 
