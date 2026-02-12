@@ -10,11 +10,11 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
     color: white;
 }
 
-/* Background slideshow */
+/* Background */
 .background {
     position: fixed;
     inset: 0;
@@ -27,27 +27,35 @@ body {
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.75); /* darker for readability */
     z-index: -1;
 }
 
-/* Main container */
+/* Container now scrollable */
 .container {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
+    position: relative;
+    width: 92%;
+    max-width: 700px;
+    margin: 80px auto;
+    padding-bottom: 100px;
 }
 
 h1 {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+/* Larger screens */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
 }
 
 button {
     padding: 12px 25px;
-    font-size: 18px;
-    margin: 10px;
+    font-size: 16px;
+    margin: 15px 10px;
     cursor: pointer;
     border: none;
     border-radius: 8px;
